@@ -24,3 +24,20 @@ def moji_type(moji):
     p = regex.compile(r'\p{Script_Extensions=Han}')
     code = 7 if p.fullmatch(moji) else code
     return (code)
+
+def separate_tango(sentence):
+    tango = ""
+    t_list = []
+    pre_moji = ""
+    pre_cord = 0
+    for m in moji:
+        cord = moji_type(m)
+        if cord != pre_cord and pre_cord != 0:
+            t_list.append(tango)
+            tango = ""
+        tango += m
+        pre_cord = cord
+    t_list.append(tango)
+    return (t_list)
+        
+print(separate_tango("aaaあああ"))
